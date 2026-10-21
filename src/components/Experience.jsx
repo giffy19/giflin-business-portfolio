@@ -1,47 +1,57 @@
 import React from 'react';
-import './Experience.css';
+
+const experiences = [
+  {
+    id: 'movidu',
+    company: 'Movidu Technologies',
+    role: 'Business Development & Marketing Intern',
+    period: 'Internship',
+    bullets: [
+      'Conducted prospective client outreach and follow-ups.',
+      'Supported market research and lead generation.',
+      'Contributed to relationship building and strategic partnership efforts.',
+    ],
+  },
+  {
+    id: 'alpha-ori',
+    company: 'Alpha Ori Technologies / ZeroNorth',
+    role: 'Intern',
+    period: 'Jun 2025 – Jul 2025',
+    bullets: [
+      'Worked collaboratively with colleagues across teams.',
+      'Contributed to discussions about user needs and product requirements.',
+    ],
+  },
+];
 
 const Experience = () => {
-  const experiences = [
-    {
-      id: 1,
-      company: "Eagle Hi-Tech",
-      role: "Web Development Intern",
-      period: "May 2024 – Jun 2024",
-      description: "Built responsive websites using modern web technologies. Focused on UI design and performance optimization. Gained hands-on experience with HTML, CSS, JavaScript, and modern frameworks like React.",
-      accentColor: "#3498db",
-    },
-    {
-      id: 2,
-      company: "Alpha Ori Technologies",
-      role: "Designer Intern",
-      period: "Jun 2025 – Jul 2025",
-      description: "Worked on visual design and UI/UX projects, creating digital creatives and responsive visual experiences while collaborating on design requirements and content.",
-      accentColor: "#e74c3c",
-    }
-  ];
-
   return (
-    <section id="experience" className="experience-section">
+    <section id="experience" className="experience" aria-label="Professional experience">
       <div className="container">
-        <h2 className="section-title">Experience</h2>
+        <div className="section-header">
+          <span className="section-eyebrow">Career Path</span>
+          <h2 className="section-title">Experience</h2>
+        </div>
 
-        <div className="experience-cards">
+        <div className="experience-list">
           {experiences.map(exp => (
-            <div key={exp.id} className="experience-card" style={{ '--accent': exp.accentColor }}>
+            <article key={exp.id} className="exp-card" aria-label={`${exp.company} — ${exp.role}`}>
               <div className="exp-header">
-                <div className="exp-dot" style={{ background: exp.accentColor }}></div>
                 <div>
                   <h3 className="exp-company">{exp.company}</h3>
-                  <div className="exp-meta">
-                    <span className="exp-role" style={{ color: exp.accentColor }}>{exp.role}</span>
-                    <span className="exp-sep">·</span>
-                    <span className="exp-period">{exp.period}</span>
-                  </div>
+                  <span className="exp-role">{exp.role}</span>
                 </div>
+                <span className="exp-period">
+                  {exp.period}
+                </span>
               </div>
-              <p className="exp-description">{exp.description}</p>
-            </div>
+
+              <ul className="exp-bullets" aria-label="Responsibilities">
+                {exp.bullets.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            </article>
           ))}
         </div>
       </div>

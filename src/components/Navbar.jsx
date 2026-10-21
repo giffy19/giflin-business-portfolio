@@ -1,33 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth > 780) setMenuOpen(false); };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  const close = () => setMenuOpen(false);
+
+  const navLinks = [
+    { href: '#home',       label: 'Home' },
+    { href: '#about',      label: 'About' },
+    { href: '#experience', label: 'Experience' },
+    { href: '#skills',     label: 'Skills' },
+    { href: '#education',  label: 'Education' },
+    { href: '#achievements', label: 'Achievements' },
+    { href: '#contact',    label: 'Contact' },
+  ];
 
   return (
-    <nav className="navbar">
-      <div className="nav-container">
-        <div className="nav-logo">Giflin Godshia</div>
-        <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-          <a href="#home" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</a>
-          <a href="#about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</a>
-          <a href="#skills" className="nav-link" onClick={() => setIsMenuOpen(false)}>Skills</a>
-          <a href="#experience" className="nav-link" onClick={() => setIsMenuOpen(false)}>Experience</a>
-          <a href="#design" className="nav-link" onClick={() => setIsMenuOpen(false)}>Design</a>
-          <a href="#projects" className="nav-link" onClick={() => setIsMenuOpen(false)}>Projects</a>
-          <a href="#achievements" className="nav-link" onClick={() => setIsMenuOpen(false)}>Achievements</a>
-          <a href="#contact" className="nav-link" onClick={() => setIsMenuOpen(false)}>Contact</a>
+    <>
+      <a href="#home" className="skip-link">Skip to main content</a>
+      <nav className={`navbar${scrolled ? ' scrolled' : ''}`} aria-label="Main navigation">
+        <div className="nav-inner">
+          <a href="#home" className="nav-brand" onClick={close}>
+            Giflin <span>G.</span>
+          </a>
+
+          <ul className="nav-links" role="list">
+            {navLinks.map(({ href, label }) => (
+              <li key={href}>
+                <a href={href} className="nav-link">{label}</a>
+              </li>
+            ))}
+          </ul>
+
+          <button
+            className="nav-hamburger"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMenuOpen(prev => !prev)}
+          >
+            <span className="hamburger-bar" />
+            <span className="hamburger-bar" />
+            <span className="hamburger-bar" />
+          </button>
         </div>
-        <div className="nav-toggle" onClick={toggleMenu}>
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
-        </div>
-      </div>
-    </nav>
+      </nav>
+
+      <nav
+        id="mobile-menu"
+        className={`nav-mobile${menuOpen ? ' open' : ''}`}
+        aria-hidden={!menuOpen}
+        hidden={!menuOpen}
+        aria-label="Mobile navigation"
+      >
+        {navLinks.map(({ href, label }) => (
+          <a key={href} href={href} onClick={close}>{label}</a>
+        ))}
+      </nav>
+    </>
   );
 };
 

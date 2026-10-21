@@ -1,74 +1,46 @@
 import React from 'react';
-import './About.css';
 
 const About = () => {
+  const details = [
+    {
+      label: 'Education',
+      value: 'B.Tech Information Technology',
+    },
+    {
+      label: 'CGPA',
+      value: '8.02',
+    },
+    {
+      label: 'Location',
+      value: 'Chennai, India',
+    },
+  ];
+
   return (
-    <section id="about" className="about">
+    <section id="about" className="about" aria-label="About Giflin">
       <div className="container">
-        <h2 className="section-title">About Me</h2>
-        
-        <div className="about-content">
-          <div className="about-text">
-            <div className="about-description">
-              <p>
-                I'm a passionate B.Tech IT student from Chennai with a strong foundation in 
-                frontend development and UI/UX design. My journey in technology began with 
-                problem-solving on platforms like Skillrack, where I've solved 625+ problems, 
-                honing my logical thinking and coding skills.
-              </p>
-              <p>
-                This experience led me to explore web development and UI/UX design, where 
-                I've completed 5+ projects that combine functionality with aesthetic appeal. 
-                I enjoy the process of transforming ideas into interactive digital experiences 
-                that users love.
-              </p>
-              <p>
-                Alongside web development, I enjoy creating visual designs, social media creatives, 
-                promotional materials, and digital experiences that communicate ideas clearly and beautifully.
-              </p>
-            </div>
-            
-            <div className="services-medium">
-              <div className="service-item">
-                <span className="service-symbol">🎨</span>
-                <span className="service-label">Web Design</span>
+        <div className="section-header">
+          <span className="section-eyebrow">Who I Am</span>
+          <h2 className="section-title">About Me</h2>
+        </div>
+
+        <div className="about-simple">
+          <p className="about-para">
+            My business development and marketing exposure includes client communication and
+            follow-ups, relationship building, market research and lead generation. I value
+            organization and practical problem-solving, and I am interested in contributing to
+            business operations and customer relations.
+          </p>
+
+          <div className="about-info-row">
+            {details.map(({ label, value }) => (
+              <div key={label} className="about-info-item">
+                <div>
+                  <span className="detail-label">{label}</span>
+                  <span className="detail-value">{value}</span>
+                </div>
               </div>
-              <div className="service-item">
-                <span className="service-symbol">💻</span>
-                <span className="service-label">Web Development</span>
-              </div>
-              <div className="service-item">
-                <span className="service-symbol">📱</span>
-                <span className="service-label">UI Prototyping</span>
-              </div>
-              <div className="service-item">
-                <span className="service-symbol">✂️</span>
-                <span className="service-label">Editing</span>
-              </div>
-              <div className="service-item">
-                <span className="service-symbol">🖌️</span>
-                <span className="service-label">Graphic Design</span>
-              </div>
-              <div className="service-item">
-                <span className="service-symbol">📣</span>
-                <span className="service-label">Social Media Design</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="about-stats">
-            <div className="stat-box">
-              <div className="stat-number">625+</div>
-              <div className="stat-label">Skillrack Problems Solved</div>
-            </div>
-            <div className="stat-box">
-              <div className="stat-number">10+</div>
-              <div className="stat-label">Certifications</div>
-            </div>
-            <div className="stat-box">
-              <div className="stat-number">5+</div>
-              <div className="stat-label">UI/UX & Web Projects</div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
