@@ -34,7 +34,7 @@ const Navbar = () => {
       <nav className={`navbar${scrolled ? ' scrolled' : ''}`} aria-label="Main navigation">
         <div className="nav-inner">
           <a href="#home" className="nav-brand" onClick={close}>
-            Giflin <span>G.</span>
+            Giflin <span>D.S</span>
           </a>
 
           <ul className="nav-links" role="list">

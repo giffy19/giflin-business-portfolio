@@ -10,7 +10,7 @@ const Hero = () => {
             Business Development | Management &amp; Operations | Client Relations
           </p>
 
-          <h1 className="hero-name">Giflin Godshia</h1>
+          <h1 className="hero-name">Giflin Godshia D.S</h1>
 
           <p className="hero-headline">
             Building Relationships. Driving Business Growth.
